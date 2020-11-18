@@ -30,6 +30,7 @@ function displayResults(responseJson) {
 }
 
 function getResults(query, resultsLimit) {
+  console.log("Yay, getResults run!")
   //const params = object with params needed
   //call buildQueryParams(params) to get queryString
   //build apiCall = apiUrl + queryString
@@ -40,9 +41,17 @@ function getResults(query, resultsLimit) {
 
 function submitForm() {
   //watch for submit event
-  //get user entry area = stateCode param
-  //get user entry limit = resultsLimit
-  //get and display results, getResults(stateCode, resultsLimit)
+  $('form').submit(event => {
+    event.preventDefault();
+    //get user entry area = stateCode param
+    const stateCode = $('#area').val();
+    //get user entry limit = resultsLimit
+    const resultsLimit = $('#js-max-results').val();
+    console.log(stateCode);
+    console.log(resultsLimit);
+    //get and display results, getResults(stateCode, resultsLimit)
+    getResults(stateCode, resultsLimit);
+  });
 }
 
 $(submitForm);
