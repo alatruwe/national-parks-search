@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>National Parks Search</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>
+    <h1>National Parks Search</h1>
+  </header>
+  <main>
+    <div class="container">
+      <form>
+        <label for="np-name">Enter National Parks name:</label>
+        <input type="text" id="np-name" name="np-name" required>
+        <input type="submit">
+      </form>
+      <p class="js-error-message"></p>
+      <section id="results" class="hidden">
+        <h2>Search results</h2>
+        <ul id="results-list"></ul>
+      </section>
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
