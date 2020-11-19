@@ -27,10 +27,30 @@ function buildQueryParams(params) {
 
 function displayResults(responseJson) {
   //remove previous results
+  $('#results-list').empty();
   console.log(responseJson);
   //loop through responseJson
+  for (let i = 0; i < responseJson.data.length; i++) {
+    $('#results-list').append(
+      `<li>
+        <h3>
+          <a target="_blank" href="${responseJson.data[i].url}">${responseJson.data[i].fullName}</a>
+        </h3>
+        <p>${responseJson.data[i].description}</p>
+        <div>
+          <p>Address: </p>
+          <p>${responseJson.data[i].addresses[0].line1}</p>
+          <p>${responseJson.data[i].addresses[0].line2}</p>
+          <p>${responseJson.data[i].addresses[0].city}, 
+            ${responseJson.data[i].addresses[0].stateCode} 
+            ${responseJson.data[i].addresses[0].postalCode}</p>
+        </div>
+      </li>`
+    )
+  }
   //add to html ul each element with full name of the NP, description, website url, NP address
   //remove hidden class
+  $('#results').removeClass('hidden');
 }
 
 function getResults(stateCode, resultsLimit) {
@@ -45,7 +65,7 @@ function getResults(stateCode, resultsLimit) {
     limit: resultsLimit,
   };
 
-  //build and add statecodes to queryString (allows multiple states search)
+  //build and add multiple statecodes to queryString
   const stateCodeList = stateCode.split(",");
   let stateCodeQuery = '';
   for (const property in stateCodeList) {
