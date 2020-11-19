@@ -1,3 +1,4 @@
+'use strict';
 /* what I need to call NPS API:
 - authentication: yes, api_key in q param
 - API key: nhbz6vHQiA3cxQvvtjnV8egSqABiX9snUwftUNi3
@@ -60,22 +61,18 @@ function getResults(stateCode, resultsLimit) {
       'X-Api-Key': apiKey
     })
   };
+
+  const stateCodeList = stateCode.split(",");
+  
   //params
   const params = {
     limit: resultsLimit,
+    statecode: stateCodeList,
   };
-
-  //build and add multiple statecodes to queryString
-  const stateCodeList = stateCode.split(",");
-  let stateCodeQuery = '';
-  for (const property in stateCodeList) {
-    stateCodeQuery += `statecode=${stateCodeList[property]}` + '&';
-  }
-  let stateCodeQueryString = '&' + stateCodeQuery.slice(0, -1);
 
   //build final api call
   const queryString = buildQueryParams(params);
-  const apiCall = apiUrl + '?' + queryString + stateCodeQueryString;
+  const apiCall = apiUrl + '?' + queryString ;
 
   //call API
   fetch(apiCall, options)
