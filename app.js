@@ -32,24 +32,26 @@ function displayResults(responseJson) {
   console.log(responseJson);
   //loop through responseJson
   for (let i = 0; i < responseJson.data.length; i++) {
+      //add to html ul each element with full name of the NP, description, website url, NP address
     $('#results-list').append(
       `<li>
         <h3>
           <a target="_blank" href="${responseJson.data[i].url}">${responseJson.data[i].fullName}</a>
         </h3>
         <p>${responseJson.data[i].description}</p>
-        <div>
+      </li>`);
+    if (responseJson.data[i].addresses.length > 0) {
+      $('#results-list').append(
+        `<div>
           <p>Address: </p>
           <p>${responseJson.data[i].addresses[0].line1}</p>
           <p>${responseJson.data[i].addresses[0].line2}</p>
           <p>${responseJson.data[i].addresses[0].city}, 
             ${responseJson.data[i].addresses[0].stateCode} 
             ${responseJson.data[i].addresses[0].postalCode}</p>
-        </div>
-      </li>`
-    )
+        </div>`
+      )}  
   }
-  //add to html ul each element with full name of the NP, description, website url, NP address
   //remove hidden class
   $('#results').removeClass('hidden');
 }
