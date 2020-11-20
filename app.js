@@ -61,18 +61,16 @@ function getResults(stateCode, resultsLimit) {
       'X-Api-Key': apiKey
     })
   };
-
-  const stateCodeList = stateCode.split(",");
   
   //params
   const params = {
-    limit: resultsLimit,
-    statecode: stateCodeList,
+    limit: resultsLimit
   };
 
   //build final api call
   const queryString = buildQueryParams(params);
-  const apiCall = apiUrl + '?' + queryString ;
+  const apiCall = apiUrl + '?' + queryString + '&stateCode=' + stateCode;
+  console.log(apiCall);
 
   //call API
   fetch(apiCall, options)
